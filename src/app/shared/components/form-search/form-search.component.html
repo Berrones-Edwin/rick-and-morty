@@ -1,1 +1,24 @@
-<p>form-search works!</p>
+<form [formGroup]="form" novalidate  (ngSubmit)="searchCharacter($event)" class="form-inline my-2 my-lg-0">
+    <input class="form-control mr-sm-2"
+            placeholder="Search" 
+            minlength="3"
+            formControlName="search"
+            [class.is-valid] = "searchIsValid"
+            [class.is-invalid] = "searchIsInvalid"
+            autocomplete="off"
+            type="text"
+            >
+
+    
+
+    <button  [disabled]="form.invalid" class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    <ng-container *ngIf="searchField.errors && searchField.touched">
+    
+      <div class="invalid-feedback" *ngIf="searchField.hasError('minLenght')">
+          Este campo debe de tener minimo {{ nameField.errors.minlength.requiredLength }}
+      </div>
+      <div class="invalid-feedback" *ngIf="searchField.hasError('required')">
+          Escriba el nombre del personaje a buscar.
+      </div>
+    </ng-container>
+</form>

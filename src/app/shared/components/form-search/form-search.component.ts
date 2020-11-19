@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-form-search',
@@ -7,9 +9,57 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FormSearchComponent implements OnInit {
 
-  constructor() { }
+  form: FormGroup
 
-  ngOnInit(): void {
+  constructor(
+    private _formBuilder: FormBuilder,
+    private _router: Router
+  ) {
+    this.createForm();
+  }
+
+  ngOnInit(): void { }
+
+  createForm() {
+    this.form = this._formBuilder.group({
+      search: ['', [Validators.minLength(3), Validators.required]]
+    })
+  }
+
+  searchCharacter(event: Event) {
+    event.preventDefault();
+
+    if (this.form.invalid) return;
+
+    console.log(this.form.value)
+
+    const { search } = this.form.value
+
+    this._router.navigate(['/list'],{
+      queryParams: {
+        q : search
+      }
+    })
+    // this._router.navigate([
+    //   '/list',
+    //   search
+    // ])
+
+    // this._router.navigateByUrl()
+
+
+
+  }
+
+  get searchField() {
+    return this.form.get('search')
+  }
+
+  get searchIsValid() {
+    return this.searchField.valid && this.searchField.touched
+  }
+  get searchIsInvalid() {
+    return this.searchField.invalid && this.searchField.touched
   }
 
 }

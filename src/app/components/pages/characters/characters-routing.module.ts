@@ -8,8 +8,11 @@ import { CharactersListComponent } from './characters-list/characters-list.compo
 
 
 const routes: Routes = [
-    { path: '', component: CharactersListComponent },
-    { path: 'details/{id}', component: CharactersDetailsComponent }
+    // { path: '', redirectTo: 'list/:id', pathMatch: 'full' },
+    { path: '', redirectTo: 'list', pathMatch: 'full' },
+    // { path: 'list/:id', component: CharactersListComponent },
+    { path: 'list', component: CharactersListComponent },
+    { path: 'details/:id', component: CharactersDetailsComponent }
 ];
 
 @NgModule({
