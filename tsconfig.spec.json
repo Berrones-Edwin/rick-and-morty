@@ -5,7 +5,24 @@
     "outDir": "./out-tsc/spec",
     "types": [
       "jasmine"
-    ]
+    ],
+    "paths": {
+      "@app/*": [
+        "src/app/*"
+      ],
+      "@app/shared/*": [
+        "src/app/shared/*"
+      ],
+      "@characters/*": [
+        "src/app/components/pages/characters/*"
+      ],
+      "@pages/*": [
+        "src/app/components/pages/*"
+      ],
+      "@enviroments/": [
+        "src/enviroments/*"
+      ]
+    }
   },
   "files": [
     "src/test.ts",
