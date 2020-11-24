@@ -5,9 +5,9 @@ export interface Characters {
     results: Character[]
 }
 
-interface Info{
-    "count":number;
-    "pages":number;
-    "next":string;
-    "prev":string;
+export interface Info{
+    count:number;
+    pages:number;
+    next:string;
+    prev:string;
 }

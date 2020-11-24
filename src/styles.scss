@@ -1,3 +1,6 @@
+html{
+    scroll-behavior: smooth;
+}
 .container{
     margin-top: 4rem;
 }
@@ -9,6 +12,8 @@
     background-color: #fff;
     max-width: 529px;
     transition: all 0.2 ease-in-out;
+    white-space: nowrap;
+    overflow: hidden;
     
     &:hover{
         box-shadow: 0 5px 5px rgba(0,0,0,0.19),
@@ -28,5 +33,21 @@
 
     .card-inner{
         padding: 10px;
+    }
+}
+.no-hidden{
+    position: fixed;
+    bottom:10px;
+    right:10px;
+    visibility: visible;
+
+}
+
+// Version Mobile
+@media(max-width:570px){
+    .card{
+        img{
+            opacity: 1;
+        }
     }
 }
