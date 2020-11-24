@@ -1,1 +1,11 @@
-<p>characters-details works!</p>
+<div class="row">
+    <div class="col-xs-12 col-sm-6 col-md-4" *ngIf="character$ | async as  character; else notResults">
+        <app-characters [character]=character></app-characters>
+    </div>
+    <ng-template #notResults>
+        <div class="col-xs-12-col-sm-12-col-md-mt-5 container-notFound">
+            <p>Loading...</p>
+        </div>
+    </ng-template>
+</div>
+<div class="btn btn-dark" (click)="onGoBack()">Go back</div>

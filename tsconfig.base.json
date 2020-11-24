@@ -9,12 +9,30 @@
     "downlevelIteration": true,
     "experimentalDecorators": true,
     "moduleResolution": "node",
-    "importHelpers": true,
+    // "importHelpers": true,
+    "emitDecoratorMetadata": true,
     "target": "es2015",
     "module": "es2020",
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "@app/*": [
+        "src/app/*"
+      ],
+      "@shared/*": [
+        "src/app/shared/*"
+      ],
+      "@characters/*": [
+        "src/app/components/pages/characters/*"
+      ],
+      "@pages/*": [
+        "src/app/components/pages/*"
+      ],
+      "@enviroments/": [
+        "src/enviroments/*"
+      ]
+    }
   }
 }

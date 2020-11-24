@@ -31,24 +31,13 @@ export class FormSearchComponent implements OnInit {
 
     if (this.form.invalid) return;
 
-    console.log(this.form.value)
-
     const { search } = this.form.value
 
-    this._router.navigate(['/list'],{
+    this._router.navigate(['/list'], {
       queryParams: {
-        q : search
+        q: search
       }
-    })
-    // this._router.navigate([
-    //   '/list',
-    //   search
-    // ])
-
-    // this._router.navigateByUrl()
-
-
-
+    }).then((res) => console.log('search'))
   }
 
   get searchField() {
