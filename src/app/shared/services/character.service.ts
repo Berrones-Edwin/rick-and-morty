@@ -3,8 +3,6 @@ import { HttpClient } from "@angular/common/http";
 import { Character } from '../interface/Character.interface';
 import { environment } from "../../../environments/environment";
 import { Characters } from '../interface/Characters.interface';
-// import { Character } from '@shared/interface/Character.interface';
-// import { environment } from "@environment/environments/environment";
 
 @Injectable({
   providedIn: 'root'
