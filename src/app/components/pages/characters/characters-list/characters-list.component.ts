@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 import { CharacterService } from "@shared/services/character.service";
 
 import { Character } from "@shared/interface/Character.interface";
-import { Info } from "@shared/interface/Characters.interface";
+import { Characters, Info } from "@shared/interface/Characters.interface";
 
 
 @Component({
@@ -68,20 +68,10 @@ export class CharactersListComponent implements OnInit {
   }
 
   getDataFromService(): void {
-
-    // this.characters$ = this.characterSvc.getCharacters(this.query, this.pageNum)
-    //   .pipe(
-    //     take(1),
-    //     map(res => {
-    //       this.info = res.info
-    //       console.log(this.info);
-    //       return res.results
-    //     })
-    //   )
-
+    
     this.characterSvc.getCharacters(this.query, this.pageNum)
       .pipe(take(1))
-      .subscribe((resp) => {
+      .subscribe((resp: Characters) => {
         const { info, results } = resp;
         this.characters = [...this.characters, ...results]
         this.info = info

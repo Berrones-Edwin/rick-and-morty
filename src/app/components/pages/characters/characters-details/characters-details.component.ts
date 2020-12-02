@@ -1,12 +1,15 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
 
+import { CharacterService } from 'src/app/shared/services/character.service';
+
+import { TrackHttpError } from '@app/shared/models/TrackHttpError';
 import { Character } from 'src/app/shared/interface/Character.interface';
 
-import { CharacterService } from 'src/app/shared/services/character.service';
 
 @Component({
   selector: 'app-characters-details',
@@ -15,7 +18,7 @@ import { CharacterService } from 'src/app/shared/services/character.service';
 })
 export class CharactersDetailsComponent implements OnInit {
 
-  character$: Observable<Character>
+  character$: Observable<Character | TrackHttpError>
   constructor(
     private activatedRoute: ActivatedRoute,
     private location: Location,
