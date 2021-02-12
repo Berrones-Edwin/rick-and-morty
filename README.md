@@ -1,27 +1,40 @@
 # RickAndMorty
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.0.
+Appliaction where you can see / search information of all characters of the serie Rick And Morty
+Aplicación donde se puede ver / buscar la información de todos los personajes de la serie Rick and Morty.
 
-## Development server
+## Technologies | Tecnologías 
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+- Angular
+- Bootstrap
+- [API Rick and Morty](https://rickandmortyapi.com)
+- Laravel
+- MYSQL
 
-## Code scaffolding
+## Demo
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+If you want to see the demo of this proyect deployed, you can visit [Demo of the proyect](https://berrones-edwin.github.io/rick-and-morty/)
 
-## Build
+ Si tu quieres puedes ver el demo del proyecto ya desplegado, visitame [Demo of the proyect](https://berrones-edwin.github.io/rick-and-morty/)
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 
-## Running unit tests
+## Installation | Instalación
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+To install and run this proyect just type and execute
+Para instalar y ejecutar el proyecto 
 
-## Running end-to-end tests
+```bash
+git clone https://github.com/Berrones-Edwin/rick-and-morty.git
+```
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+```bash
+npm install
+```
 
-## Further help
+```bash
+ng serve
+```
+## Preview
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+![](https://user-images.githubusercontent.com/44040730/107432348-7359f200-6aed-11eb-9a86-150b68540653.png)
+
