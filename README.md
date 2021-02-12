@@ -8,8 +8,6 @@ Aplicación donde se puede ver / buscar la información de todos los personajes 
 - Angular
 - Bootstrap
 - [API Rick and Morty](https://rickandmortyapi.com)
-- Laravel
-- MYSQL
 
 ## Demo
 
@@ -20,7 +18,7 @@ If you want to see the demo of this proyect deployed, you can visit [Demo of the
 
 ## Installation | Instalación
 
-To install and run this proyect just type and execute
+To install and run this proyect just type and execute <br>
 Para instalar y ejecutar el proyecto 
 
 ```bash
