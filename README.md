@@ -1,6 +1,6 @@
 # RickAndMorty
 
-Appliaction where you can see / search information of all characters of the serie Rick And Morty
+Appliaction where you can see / search information of all characters of the serie Rick And Morty <br>
 Aplicación donde se puede ver / buscar la información de todos los personajes de la serie Rick and Morty.
 
 ## Technologies | Tecnologías 
