@@ -1,11 +1,61 @@
 <div class="row">
-    <div class="col-xs-12 col-sm-6 col-md-4" *ngIf="character$ | async as  character; else notResults">
-        <app-characters [character]=character></app-characters>
+  <ng-container *ngIf="character; else notResults">
+    <div class="col-md-4">
+      <img
+        [src]="character.image"
+        class="img-fluid img-thumbnail"
+        [alt]="character.name"
+      />
     </div>
-    <ng-template #notResults>
-        <div class="col-xs-12-col-sm-12-col-md-mt-5 container-notFound">
-            <p>Loading...</p>
-        </div>
-    </ng-template>
+    <div class="col-md-8">
+      <h3>{{ character.name }}</h3>
+      <div class="d-flex justify-content-start">
+        <p
+          class="badge mr-2"
+          [ngClass]="{
+            ' badge-primary ': character.gender === 'Male',
+            ' badge-warning ': character.gender === 'Female'
+          }"
+        >
+          {{ character.gender }}
+        </p>
+        <p
+          class="badge mr-3"
+          [ngClass]="{
+            ' badge-danger ': character.status === 'Dead',
+            ' badge-success ': character.status === 'Alive'
+          }"
+        >
+          <b>Status:</b> {{ character.status }}
+        </p>
+        <h6>Total Episodies {{ character.episode.length }}</h6>
+      </div>
+      <hr />
+    </div>
+    <div class="col-md-6" *ngIf="origin">
+      <h4>
+        Origin <small>{{ character.origin.name }}</small>
+      </h4>
+      <h4>
+        Location<small>{{ character.location.name }}</small>
+      </h4>
+      <p *ngIf="origin.dimesion">Dimesion {{ origin.dimesion }}</p>
+      <p>Total Residents {{ origin.residents.length }}</p>
+    </div>
+    <div class="col-md-6" *ngIf="locationCharacter">
+      <h4>
+        Location <small>{{ character.location.name && 'Unknow' }}</small>
+      </h4>
+      <p>
+        Dimension {{ locationCharacter.dimension && 'Unknow' }}
+      </p>
+      <p>Total Residents {{ locationCharacter.residents.length }}</p>
+    </div>
+  </ng-container>
+  <ng-template #notResults>
+    <div class="col-xs-12-col-sm-12-col-md-mt-5 container-notFound">
+      <p>Loading...</p>
+    </div>
+  </ng-template>
 </div>
-<div class="btn btn-dark" (click)="onGoBack()">Go back</div>
+<!-- <div class="btn btn-dark" (click)="onGoBack()">Go back</div> -->

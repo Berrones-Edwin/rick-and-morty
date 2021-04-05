@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { CharacterRoutingModule } from "./characters-routing.module";
+import { CharacterRoutingModule } from './characters-routing.module';
 
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
@@ -9,17 +9,13 @@ import { CharactersListComponent } from './characters-list/characters-list.compo
 import { CharactersDetailsComponent } from './characters-details/characters-details.component';
 import { CharactersComponent } from './characters.component';
 
-
-
 @NgModule({
-  exports: [
-    CharactersListComponent
+  exports: [CharactersListComponent],
+  declarations: [
+    CharactersListComponent,
+    CharactersDetailsComponent,
+    CharactersComponent,
   ],
-  declarations: [CharactersListComponent, CharactersDetailsComponent, CharactersComponent],
-  imports: [
-    CommonModule,
-    CharacterRoutingModule,
-    InfiniteScrollModule
-  ]
+  imports: [CommonModule, CharacterRoutingModule, InfiniteScrollModule],
 })
-export class CharactersModule { }
+export class CharactersModule {}
