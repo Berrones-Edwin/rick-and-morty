@@ -1,36 +1,40 @@
 import { Component, OnInit, Inject, HostListener } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, ParamMap, Router } from '@angular/router';
-import { DOCUMENT } from "@angular/common";
+import {
+  ActivatedRoute,
+  NavigationEnd,
+  ParamMap,
+  Router,
+} from '@angular/router';
+import { DOCUMENT } from '@angular/common';
 
-import { filter, map, take, tap } from "rxjs/operators";
+import { filter, map, take, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
-import { CharacterService } from "@shared/services/character.service";
+import { CharacterService } from '@shared/services/character.service';
 
-import { Character } from "@shared/interface/Character.interface";
-import { Characters, Info } from "@shared/interface/Characters.interface";
-
+import { Character } from '@shared/interface/Character.interface';
+import { Characters, Info } from '@shared/interface/Characters.interface';
 
 @Component({
   selector: 'app-characters-list',
   templateUrl: './characters-list.component.html',
-  styleUrls: ['./characters-list.component.scss']
+  styleUrls: ['./characters-list.component.scss'],
 })
 export class CharactersListComponent implements OnInit {
-
   characters: Character[] = [];
   showGoUpButton = false;
   private pageNum = 1;
-  private query = "";
-  private hideScrollHeight = 200
-  private showScrollHeight = 500
+  private query = '';
+  private hideScrollHeight = 200;
+  private showScrollHeight = 500;
   info: Info = {
     count: null,
     pages: null,
     next: null,
-    prev: null
+    prev: null,
   };
 
+  listFavorites: Array<string> = [];
   constructor(
     @Inject(DOCUMENT) private document: Document,
     private characterSvc: CharacterService,
@@ -41,50 +45,64 @@ export class CharactersListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getCharactersByQuery()
+    this.getCharactersByQuery();
+  }
+
+  addToFavorite(id) {
+    if (localStorage.getItem('favorites'))
+      this.listFavorites = [
+        ...JSON.parse(localStorage.getItem('favorites')),
+      ];
+
+    this.listFavorites = [...this.listFavorites, id];
+
+    localStorage.setItem('favorites', JSON.stringify(this.listFavorites));
   }
 
   private onURLChanged() {
     this.router.events
-      .pipe(
-        filter((events) => events instanceof NavigationEnd)
-      )
+      .pipe(filter((events) => events instanceof NavigationEnd))
       .subscribe(() => {
         this.pageNum = 1;
         this.getCharactersByQuery();
-      })
+      });
   }
 
   getCharactersByQuery(): void {
     this.activatedRoute.queryParams
-      .pipe(
-        take(1)
-      )
+      .pipe(take(1))
       .subscribe((params: ParamMap) => {
-        this.query = params['q']
+        this.query = params['q'];
         this.characters = [];
-        this.getDataFromService()
-      })
+        this.getDataFromService();
+      });
   }
 
   getDataFromService(): void {
-    
-    this.characterSvc.getCharacters(this.query, this.pageNum)
+    this.characterSvc
+      .getCharacters(this.query, this.pageNum)
       .pipe(take(1))
       .subscribe((resp: Characters) => {
         const { info, results } = resp;
-        this.characters = [...this.characters, ...results]
-        this.info = info
-
-      })
+        this.characters = [...this.characters, ...results];
+        this.info = info;
+      });
   }
   @HostListener('window:scroll', [])
   onWindowScroll(): void {
-
     const yOffSet = window.pageYOffset;
-    if ((yOffSet || this.document.documentElement.scrollTop || this.document.body.scrollTop) > this.showScrollHeight) {
+    if (
+      (yOffSet ||
+        this.document.documentElement.scrollTop ||
+        this.document.body.scrollTop) > this.showScrollHeight
+    ) {
       this.showGoUpButton = true;
-    } else if (this.showGoUpButton && (yOffSet || this.document.documentElement.scrollTop || this.document.body.scrollTop) < this.hideScrollHeight) {
+    } else if (
+      this.showGoUpButton &&
+      (yOffSet ||
+        this.document.documentElement.scrollTop ||
+        this.document.body.scrollTop) < this.hideScrollHeight
+    ) {
       this.showGoUpButton = false;
     }
   }
@@ -100,7 +118,6 @@ export class CharactersListComponent implements OnInit {
   }
   onScrollTop(): void {
     this.document.body.scrollTop = 0; //safari
-    this.document.documentElement.scrollTop = 0; //others 
+    this.document.documentElement.scrollTop = 0; //others
   }
-
 }

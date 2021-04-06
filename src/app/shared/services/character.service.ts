@@ -19,8 +19,6 @@ export class CharacterService {
 
   getCharacters(query = '', page = 1): Observable<Characters | TrackHttpError> {
     const filter = ` ${environment.baseURL}character/?name=${query}&page=${page} `;
-
-    // filter = ` ${environment.baseURL}character/?page=${page} `;
     return this._http
       .get<Characters>(filter)
       .pipe(catchError((err) => this.handleHttpError(err)));
@@ -31,14 +29,11 @@ export class CharacterService {
       .get<Character>(` ${environment.baseURL}/character/${id}`)
       .pipe(catchError((err) => this.handleHttpError(err)));
   }
-  getLocation(url: string): Observable<LocationCharacter | TrackHttpError> {
+
+  getMultipleChatacters(ids: string) {
+    const filter = ` ${environment.baseURL}character/${ids}`;
     return this._http
-      .get<LocationCharacter>(url)
-      .pipe(catchError((err) => this.handleHttpError(err)));
-  }
-  getOrigin(url: string): Observable<OriginCharacter | TrackHttpError> {
-    return this._http
-      .get<OriginCharacter>(url)
+      .get<Characters>(filter)
       .pipe(catchError((err) => this.handleHttpError(err)));
   }
 

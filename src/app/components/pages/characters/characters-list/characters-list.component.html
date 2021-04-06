@@ -1,7 +1,7 @@
 <div class="row" infinite-scroll (scrolled)="onScrollDown()">
   <ng-container *ngIf="characters">
     <div class="card-deck mr-2" *ngFor="let character of characters">
-      <app-characters [character]="character"></app-characters>
+      <app-characters [character]="character" (favorite)="addToFavorite($event)"></app-characters>
     </div>
   </ng-container>
   <ng-template #notResults>

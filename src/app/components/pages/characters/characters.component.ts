@@ -3,17 +3,15 @@ import {
   OnInit,
   Input,
   ChangeDetectionStrategy,
+  Output,
+  EventEmitter,
 } from '@angular/core';
 import { Character } from 'src/app/shared/interface/Character.interface';
 
 @Component({
   selector: 'app-characters',
   template: `
-    <a
-      [routerLink]="['/details/', character.id]"
-      style="width: 18rem;"
-      class="card"
-    >
+    <a style="width: 16rem;" class="card">
       <img
         [src]="character.image"
         [alt]="character.name"
@@ -41,10 +39,20 @@ import { Character } from 'src/app/shared/interface/Character.interface';
           >
             <b>Status:</b> {{ character.status }}
           </p>
+          <div class="card-text">
+            Location
+            <p class="location">{{ character.location.name }}</p>
+          </div>
         </div>
       </div>
       <div class="card-footer">
-        <button class="btn btn-outline-danger">Add To favorites</button>
+        <button
+          *ngIf="showHideButton"
+          (click)="addToFavorite(character.id)"
+          class="btn btn-outline-danger"
+        >
+          Add To favorites
+        </button>
       </div>
     </a>
   `,
@@ -53,14 +61,25 @@ import { Character } from 'src/app/shared/interface/Character.interface';
       a {
         text-decoration: none;
       }
+      p.text-muted.location {
+        width: 100%;
+        word-break: break-all;
+        border: 1px solid red;
+      }
     `,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CharactersComponent implements OnInit {
   @Input() character: Character;
+  @Input() showHideButton: boolean = true;
+  @Output() favorite: EventEmitter<number> = new EventEmitter();
 
   constructor() {}
 
   ngOnInit(): void {}
+
+  addToFavorite(id) {
+    this.favorite.emit(id);
+  }
 }

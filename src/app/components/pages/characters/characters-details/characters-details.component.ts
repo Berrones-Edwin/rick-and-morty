@@ -10,6 +10,11 @@ import {
   LocationCharacter,
   OriginCharacter,
 } from 'src/app/shared/interface/Character.interface';
+import { Characters } from '@app/shared/interface/Characters.interface';
+import { JsonpClientBackend } from '@angular/common/http';
+import { isSyntheticPropertyOrListener } from '@angular/compiler/src/render3/util';
+import { Observable } from 'rxjs';
+import { TrackHttpError } from '@app/shared/models/TrackHttpError';
 
 @Component({
   selector: 'app-characters-details',
@@ -17,48 +22,27 @@ import {
   styleUrls: ['./characters-details.component.scss'],
 })
 export class CharactersDetailsComponent implements OnInit {
-  character: Character;
-
-  locationCharacter: LocationCharacter;
-  origin: OriginCharacter;
+  characters$: Observable<Characters | TrackHttpError>;
+  id: Array<string>;
 
   constructor(
-    private activatedRoute: ActivatedRoute,
     private location: Location,
     private characterSvc: CharacterService
   ) {}
 
   ngOnInit(): void {
-    this.activatedRoute.params
-      .pipe(
-        take(1),
-        switchMap((params) => this.characterSvc.getDetails(params.id))
-      )
-      .subscribe((data: Character) => {
-        if (data) {
-          this.character = data;
-        
-          this.getOrigin();
-          this.getlocation();
-        }
-      });
+    // this.activatedRoute.params
+    //   .pipe(
+    //     take(1),
+    //     switchMap((params) => this.characterSvc.getDetails(params.id))
+    //   )
+
+    if (localStorage.getItem('favorites')) {
+      this.id = JSON.parse(localStorage.getItem('favorites')).join(',');
+      this.characters$ = this.characterSvc.getMultipleChatacters(this.id+"");
+    }
   }
 
-  getlocation() {
-    this.characterSvc
-      .getLocation(this.character.location.url)
-      .subscribe((data: LocationCharacter) => {
-        this.locationCharacter = data;
-      });
-  }
-
-  getOrigin() {
-    this.characterSvc
-      .getOrigin(this.character.origin.url)
-      .subscribe((data: OriginCharacter) => {
-        this.origin = data;
-      });
-  }
   onGoBack() {
     this.location.back();
   }

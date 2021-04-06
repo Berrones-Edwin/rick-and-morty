@@ -10,7 +10,7 @@ import { CharactersListComponent } from './characters-list/characters-list.compo
 const routes: Routes = [
     { path: '', redirectTo: 'list', pathMatch: 'full' },
     { path: 'list', component: CharactersListComponent },
-    { path: 'details/:id', component: CharactersDetailsComponent }
+    { path:'favorites',component:CharactersDetailsComponent }
 ];
 
 @NgModule({
